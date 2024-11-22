@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Background Blur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Smooth transition for filter */
+        #background-image {
+            transition: filter 0.3s ease-in-out;
+        }
+
+        /* Gradient effect on the image overlay */
+        .gradient-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+        }
+
+        /* Hover effect for the range input */
+        #blur-range:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Hover effect for content box */
+        .content-box:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-800 flex justify-center items-center h-screen">
+
+    <!-- Main Container with Gradient and Hover Effect -->
+    <div class="relative w-full h-full flex justify-center items-center overflow-hidden">
+        <!-- Background Image with Gradient -->
+        <div id="background-image" class="absolute w-full h-full bg-cover bg-center gradient-overlay transition-all duration-500" style="background-image: url('/MainBefore.jpg');"></div>
+
+        <!-- Content Overlay with Smooth Transitions -->
+        <div class="relative z-10 p-6 bg-white bg-opacity-60 rounded-lg shadow-lg text-center transform transition-transform duration-500 ease-in-out content-box">
+            <h1 class="text-3xl font-extrabold text-white mb-4">Adjust Background Blur</h1>
+            <input type="range" id="blur-range" min="0" max="20" step="1" value="0" class="mt-6 w-80 h-2 bg-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
+            <p class="mt-4 text-sm text-gray-700">Adjust the slider to change the blur intensity of the background.</p>
+        </div>
+    </div>
+
+    <script>
+        // Select the blur range input and background image element
+        const blurRange = document.getElementById('blur-range');
+        const backgroundImage = document.getElementById('background-image');
+
+        // Event listener for range input change
+        blurRange.addEventListener('input', function() {
+            // Apply the blur effect dynamically based on slider value
+            const blurValue = blurRange.value;
+            backgroundImage.style.filter = `blur(${blurValue}px)`;
+        });
+    </script>
+</body>
+</html>
